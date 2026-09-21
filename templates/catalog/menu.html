@@ -1,0 +1,91 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Carta de chocolates artesanales de Casa Do Chocolate">
+    <title>Casa Do Chocolate | Carta artesanal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="{% url 'catalog:menu' %}">
+                <img class="brand-logo" src="{% static 'images/logo.png' %}" alt="Casa Do Chocolate">
+                <span>Casa Do <strong>Chocolate</strong></span>
+            </a>
+            <a class="header-contact" href="{{ whatsapp_url }}" target="_blank" rel="noopener">Encomendar por WhatsApp <span aria-hidden="true">↗</span></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <p class="eyebrow">Hecho a mano, con calma</p>
+            <h1>Pequeños momentos,<br><em>gran chocolate.</em></h1>
+            <p class="intro-copy">Una selección de chocolates artesanales preparados en pequeños lotes para regalar, compartir o disfrutar sin prisa.</p>
+        </section>
+
+        <nav class="category-nav" aria-label="Categorías del menú">
+            <a href="#todos">Todo</a>
+            {% for category, products in products_by_category.items %}
+                <a href="#{{ category|slugify }}">{{ category }}</a>
+            {% endfor %}
+        </nav>
+
+        <div class="catalog" id="todos">
+            {% for category, products in products_by_category.items %}
+                <section class="category-section" id="{{ category|slugify }}">
+                    <div class="section-heading">
+                        <h2>{{ category }}</h2>
+                        <span class="category-count">{{ products|length }} producto{{ products|length|pluralize }}</span>
+                    </div>
+                    <div class="product-grid">
+                        {% for product in products %}
+                            <article class="product-card">
+                                <div class="product-gallery" data-title="{{ product.name }}">
+                                    <button class="product-image-button" type="button" data-image="{{ product.image.url }}" data-title="{{ product.name }}" aria-label="Ampliar foto de {{ product.name }}">
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+                                    <span class="zoom-hint" aria-hidden="true">+</span>
+                                    </button>
+                                    {% if product.secondary_image %}
+                                        <button class="gallery-arrow gallery-prev" type="button" aria-label="Ver foto anterior de {{ product.name }}" data-direction="-1">‹</button>
+                                        <button class="gallery-arrow gallery-next" type="button" aria-label="Ver otra foto de {{ product.name }}" data-direction="1">›</button>
+                                        <span class="gallery-counter" aria-live="polite">1 / 2</span>
+                                        <div class="gallery-data" data-images="{{ product.image.url }}|{{ product.secondary_image.url }}"></div>
+                                    {% endif %}
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-title-row">
+                                        <h3>{{ product.name }}</h3>
+                                        <p class="price">$ {{ product.price|floatformat:0 }}</p>
+                                    </div>
+                                    {% if product.description %}<p class="description">{{ product.description }}</p>{% endif %}
+                                    <a class="order-link" href="{{ whatsapp_url }}?text=Hola%2C%20quiero%20encargar%20{{ product.name|urlencode }}" target="_blank" rel="noopener">Encargar por WhatsApp <span aria-hidden="true">↗</span></a>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% empty %}
+                <p class="empty-state">Pronto tendremos novedades deliciosas en nuestra carta.</p>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>Casa Do Chocolate</p>
+        <p>Chocolates artesanales para momentos especiales</p>
+    </footer>
+
+    <div class="image-modal" role="dialog" aria-modal="true" aria-label="Vista ampliada" hidden>
+        <button class="modal-close" type="button" aria-label="Cerrar imagen">×</button>
+        <img src="" alt="">
+        <p class="modal-title"></p>
+    </div>
+    <script src="{% static 'js/menu.js' %}"></script>
+</body>
+</html>

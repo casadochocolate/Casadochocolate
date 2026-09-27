@@ -26,7 +26,7 @@ a { color: inherit; }
 .header-contact:hover, .header-contact:focus-visible { background: var(--paper); border-color: var(--paper); transform: translateY(-1px); box-shadow: 0 10px 22px rgba(111, 70, 5, .12); }
 .header-contact span, .order-link span { font-size: 17px; margin-left: 5px; }
 main { max-width: 1180px; margin: auto; padding: 0 30px 90px; }
-.intro { max-width: 100%; margin-top: 18px; padding: 118px 40px 66px; border-radius: var(--radius-lg); background: linear-gradient(90deg, rgba(39, 18, 4, 0.76), rgba(39, 18, 4, 0.25)), url("../products/fondo.jpeg") center/cover no-repeat; box-shadow: var(--shadow-card); }
+.intro { max-width: 100%; margin-top: 18px; padding: 118px 40px 66px; border-radius: var(--radius-lg); background-image: linear-gradient(90deg, rgba(39, 18, 4, 0.76), rgba(39, 18, 4, 0.25)), url("../products/fondo.jpeg"); background-position: center; background-repeat: no-repeat; background-size: cover; box-shadow: var(--shadow-card); }
 .eyebrow { color: var(--chocolate); font-size: 11px; font-weight: 700; letter-spacing: .18em; margin: 0 0 19px; text-transform: uppercase; }
 .intro .eyebrow { color: #f9e7ba; }
 h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; }
@@ -58,6 +58,8 @@ h1 em { color: #fffdf7; font-style: normal; text-decoration: underline; text-dec
 .product-title-row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
 .product-title-row h3 { color: var(--chocolate); font-family: "Playfair Display", Georgia, serif; font-size: 20px; margin: 0; }
 .price { color: var(--chocolate); font-size: 14px; font-weight: 700; white-space: nowrap; }
+.price-variant-wrap { margin-top: 4px; margin-bottom: 8px; }
+.price-variant { font-size: 12px; color: var(--chocolate-deep); background: var(--gold-soft); border: 1px solid rgba(251, 180, 2, 0.6); border-radius: 999px; padding: 6px 10px; display: inline-block; white-space: normal; }
 .description { color: #4A3E3D; font-size: 13px; line-height: 1.55; min-height: 40px; margin: 12px 0 19px; flex: 1; }
 .option-tag { display: inline-block; margin-top: 10px; padding: 6px 10px; border-radius: 999px; background: var(--gold-soft); border: 1px solid rgba(251, 180, 2, 0.55); color: var(--chocolate-deep); font-weight: 700; letter-spacing: .01em; }
 .order-link { background: var(--gold); border: 2px solid var(--gold); border-radius: 999px; color: var(--chocolate-deep); display: block; font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 12px 14px; text-align: center; text-transform: uppercase; transition: background .2s ease, border-color .2s ease, box-shadow .2s ease; box-shadow: 0 8px 18px rgba(251, 180, 2, 0.18); margin-top: auto; }
@@ -65,7 +67,7 @@ h1 em { color: #fffdf7; font-style: normal; text-decoration: underline; text-dec
 .empty-state { color: var(--muted); padding: 30px 0; }
 .owner-section { max-width: 1180px; margin: 0 auto 80px; padding: 0 30px; }
 .owner-card { display: flex; align-items: center; gap: 28px; background: rgba(255, 253, 247, 0.9); border: 1px solid var(--line); border-radius: 22px; padding: 28px; box-shadow: var(--shadow-soft); }
-.owner-photo { width: 220px; height: 220px; object-fit: cover; border-radius: 50%; border: 4px solid var(--gold); box-shadow: 0 12px 26px rgba(111, 70, 5, .12); flex-shrink: 0; }
+.owner-photo { width: clamp(150px, 18vw, 210px); height: clamp(150px, 18vw, 210px); object-fit: cover; border-radius: 50%; border: 4px solid var(--gold); box-shadow: 0 12px 26px rgba(111, 70, 5, .12); flex-shrink: 0; }
 .owner-copy { color: var(--muted); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; text-align: left; flex: 1; min-width: 0; }
 .owner-copy h2 { margin: 0 0 10px; color: var(--chocolate); font-size: clamp(28px, 3vw, 42px); }
 .owner-copy p { margin: 0; font-size: 15px; line-height: 1.8; max-width: 700px; width: 100%; }

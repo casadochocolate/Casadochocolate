@@ -1,15 +1,7 @@
 from django.db import migrations
 
 
-PRODUCTS = [
-    ("Bombón artesanal 01", "bombon-artesanal-01.jpeg", None, 8000),
-    ("Bombón artesanal 02", "bombon-artesanal-02.jpeg", "bombon-artesanal-03.jpeg", 9000),
-    ("Bombón artesanal 03", "bombon-artesanal-04.jpeg", None, 10000),
-    ("Bombón artesanal 04", "bombon-artesanal-05.jpeg", "bombon-artesanal-09.jpeg", 11000),
-    ("Bombón artesanal 05", "bombon-artesanal-06.jpeg", None, 12000),
-    ("Bombón artesanal 06", "bombon-artesanal-07.jpeg", None, 13000),
-    ("Bombón artesanal 07", "bombon-artesanal-08.jpeg", None, 15000),
-]
+PRODUCTS = []
 
 
 def seed_products(apps, schema_editor):

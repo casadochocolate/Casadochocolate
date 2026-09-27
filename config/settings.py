@@ -19,8 +19,12 @@ def env_bool(name, default=False):
 
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-local-development-key")
-DEBUG = env_bool("DEBUG")
-ALLOWED_HOSTS = [host.strip() for host in os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if host.strip()]
+DEBUG = env_bool("DEBUG", default=True)
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,testserver").split(",")
+    if host.strip()
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",

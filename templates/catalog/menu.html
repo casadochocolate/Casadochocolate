@@ -45,17 +45,18 @@
                     </div>
                     <div class="product-grid">
                         {% for product in products %}
+                            {% with gallery=product.gallery_images %}
                             <article class="product-card">
-                                <div class="product-gallery" data-title="{{ product.name }}">
-                                    <button class="product-image-button" type="button" data-image="{{ product.image.url }}" data-title="{{ product.name }}" aria-label="Ampliar foto de {{ product.name }}">
-                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+                                <div class="product-gallery" data-title="{{ product.name }}" data-current-image="0">
+                                    <button class="product-image-button" type="button" data-image="{{ gallery.0 }}" data-title="{{ product.name }}" aria-label="Ampliar foto de {{ product.name }}">
+                                    <img src="{{ gallery.0 }}" alt="{{ product.name }}" loading="lazy">
                                     <span class="zoom-hint" aria-hidden="true">+</span>
                                     </button>
-                                    {% if product.secondary_image %}
+                                    {% if gallery|length > 1 %}
                                         <button class="gallery-arrow gallery-prev" type="button" aria-label="Ver foto anterior de {{ product.name }}" data-direction="-1">‹</button>
                                         <button class="gallery-arrow gallery-next" type="button" aria-label="Ver otra foto de {{ product.name }}" data-direction="1">›</button>
-                                        <span class="gallery-counter" aria-live="polite">1 / 2</span>
-                                        <div class="gallery-data" data-images="{{ product.image.url }}|{{ product.secondary_image.url }}"></div>
+                                        <span class="gallery-counter" aria-live="polite">1 / {{ gallery|length }}</span>
+                                        <div class="gallery-data" data-images="{{ gallery|join:'|' }}"></div>
                                     {% endif %}
                                 </div>
                                 <div class="product-info">
@@ -67,6 +68,7 @@
                                     <a class="order-link" href="{{ whatsapp_url }}?text=Hola%2C%20quiero%20encargar%20{{ product.name|urlencode }}" target="_blank" rel="noopener">Encargar por WhatsApp <span aria-hidden="true">↗</span></a>
                                 </div>
                             </article>
+                            {% endwith %}
                         {% endfor %}
                     </div>
                 </section>
@@ -83,7 +85,9 @@
 
     <div class="image-modal" role="dialog" aria-modal="true" aria-label="Vista ampliada" hidden>
         <button class="modal-close" type="button" aria-label="Cerrar imagen">×</button>
+        <button class="modal-arrow modal-prev" type="button" aria-label="Ver foto anterior">‹</button>
         <img src="" alt="">
+        <button class="modal-arrow modal-next" type="button" aria-label="Ver siguiente foto">›</button>
         <p class="modal-title"></p>
     </div>
     <script src="{% static 'js/menu.js' %}"></script>
